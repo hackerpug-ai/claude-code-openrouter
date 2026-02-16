@@ -1,6 +1,80 @@
 # OpenRouter Plugin for Claude Code
 
-Dynamically fetch and switch between 600+ OpenRouter AI models in Claude Code without needing to remember model IDs.
+Is your Claude Code stuck using the same model all the time?
+
+Is your code assistant too expensive, driving you crazy?
+
+Is your model list outdated, showing stuff from months ago?
+
+Think there's no answer?
+
+You're so stupid! There is.
+
+**OpenRouter Plugin**
+
+Finally, there's an elegant plugin for Claude Code that gives you 600+ models.
+
+## Why OpenRouter Plugin for Claude Code
+
+Claude code CAN use different models, but you need to set environment variables to use different models. Its a pain to constantly remember model IDs. OpenRouter Plugin makes it easy to switch between models without leaving your coding environment by integrating with OpenRouter's vast model library directly within your coding environment.
+
+## Features
+
+- **Dynamic model discovery** - Fetch latest models from OpenRouter API
+- **Smart caching** - Local cache with 1-hour TTL for fast access
+- **Hot-swapping** - Change models mid-session via environment variables
+- **Flexible configuration** - Project-level or global settings
+- **Search & filter** - Find models by name, provider, pricing, capabilities
+
+## Quick Start
+
+### 1. Install the Plugin
+
+**Option A: Install from GitHub Marketplace (Recommended)**
+
+```bash
+# Install from marketplace
+claude plugin install openrouter-plugin
+```
+
+**Option B: Install from GitHub Repository**
+
+```bash
+# Install directly from GitHub
+claude plugin install https://github.com/hackerpug-ai/claude-code-openrouter
+
+# Or with the git shorthand
+claude plugin install hackerpug-ai/claude-code-openrouter
+```
+
+**Option C: Manual Installation**
+
+```bash
+# Clone or symlink to Claude Code plugins
+git clone https://github.com/hackerpug-ai/claude-code-openrouter.git ~/.claude/plugins/claude-code-openrouter
+
+# Or symlink if you have the source locally
+ln -s ~/Projects/openrouter-plugin ~/.claude/plugins/openrouter-plugin
+
+# Or add to project-specific plugins
+mkdir -p .claude/plugins
+ln -s ~/Projects/openrouter-plugin .claude/plugins/openrouter-plugin
+```
+
+### 2. Set Up OpenRouter API Key
+
+```bash
+# Add to ~/.zshrc or ~/.bashrc
+export OPENROUTER_API_KEY="sk-your-api-key-here"
+```
+
+Get your API key from https://openrouter.ai/keys
+
+### 3. Use the Plugin
+
+Start Claude Code and use the commands:
+
+````bash
 
 ## Features
 
@@ -15,8 +89,30 @@ Dynamically fetch and switch between 600+ OpenRouter AI models in Claude Code wi
 
 ### 1. Install the Plugin
 
+**Option A: Install from GitHub Marketplace (Recommended)**
+
+```bash
+# Install from marketplace
+claude plugin install openrouter-plugin
+````
+
+**Option B: Install from GitHub Repository**
+
+```bash
+# Install directly from GitHub
+claude plugin install https://github.com/hackerpug-ai/claude-code-openrouter
+
+# Or with the git shorthand
+claude plugin install hackerpug-ai/claude-code-openrouter
+```
+
+**Option C: Manual Installation**
+
 ```bash
 # Clone or symlink to Claude Code plugins
+git clone https://github.com/hackerpug-ai/claude-code-openrouter.git ~/.claude/plugins/claude-code-openrouter
+
+# Or symlink if you have the source locally
 ln -s ~/Projects/openrouter-plugin ~/.claude/plugins/openrouter-plugin
 
 # Or add to project-specific plugins
@@ -66,6 +162,7 @@ List all available OpenRouter models with filtering options:
 ```
 
 Output includes:
+
 - Model name and ID
 - Context length
 - Pricing (per million tokens)
@@ -100,6 +197,7 @@ Display current OpenRouter setup:
 ```
 
 Shows:
+
 - Active model and scope
 - API key status
 - Cache information
@@ -275,6 +373,7 @@ openrouter-plugin/
 ## Contributing
 
 Contributions welcome! Areas for improvement:
+
 - Interactive model selector UI
 - Cost tracking and budget alerts
 - RSS feed integration for new models
