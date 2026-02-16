@@ -1,0 +1,17 @@
+{
+  "name": "openrouter-plugin",
+  "version": "0.1.0",
+  "description": "Dynamically fetch and switch between OpenRouter models in Claude Code",
+  "author": {
+    "name": "Justin Rich"
+  },
+  "homepage": "https://github.com/justinrich/openrouter-plugin",
+  "license": "MIT",
+  "keywords": ["openrouter", "models", "claude-code", "ai", "llm"],
+  "commands": [
+    "./commands/or-models.sh",
+    "./commands/or-set.sh",
+    "./commands/or-status.sh"
+  ],
+  "skills": "./skills"
+}

@@ -1,0 +1,99 @@
+---
+name: or-models
+description: List, search, and filter OpenRouter models dynamically fetched from the API
+argument-hint: [--refresh] [--free] [search-query]
+---
+
+# OpenRouter Models Command
+
+This command lists available models from OpenRouter's API, with options to search, filter, and refresh the model cache.
+
+## Usage
+
+- `/or-models` - List all available models
+- `/or-models [query]` - Search models by name or ID
+- `/or-models --refresh` - Force refresh the model cache from API
+- `/or-models --free` - Show only free models
+- `/or-models --provider [name]` - Filter by provider
+
+## What This Command Does
+
+1. **Fetches models** from OpenRouter's public API (`/api/v1/models`)
+2. **Caches locally** in `~/.openrouter-plugin/models.json` for 1 hour
+3. **Displays models** in a formatted table with key info:
+   - Model name and ID
+   - Context length
+   - Pricing (per million tokens)
+   - Key capabilities (vision, tools, etc.)
+
+## Implementation
+
+Use the fetch-models script to get model data:
+
+```bash
+CLAUDE_PLUGIN_ROOT="/Users/justinrich/Projects/openrouter-plugin"
+bash "$CLAUDE_PLUGIN_ROOT/scripts/fetch-models.sh" [--force]
+```
+
+Parse the JSON response and format it for display.
+
+## Search Functionality
+
+The search query filters models by:
+- Model name (case-insensitive)
+- Model ID (case-insensitive)
+- Provider name
+
+## Filtering Options
+
+- `--free`: Show only models with $0.00 pricing
+- `--provider <name>`: Filter by provider (e.g., `anthropic`, `google`, `openai`)
+- `--min-context <n>`: Minimum context length in tokens
+- `--max-price <n>`: Maximum price per million input tokens
+
+## Model Information Display
+
+For each model, show:
+```
+Model Name (provider/model-id)
+├─ Context: 200K tokens
+├─ Price: $0.50/M in, $2.00/M out
+├─ Features: vision, tools, streaming
+└─ Ranking: #45 in Programming
+```
+
+## Cache Management
+
+- Cache location: `~/.openrouter-plugin/models.json`
+- Cache TTL: 1 hour (3600 seconds)
+- Force refresh with `--refresh` flag
+
+## Error Handling
+
+- If API fetch fails, use cached models if available
+- Display cache age with last refresh time
+- Show helpful error if no models available
+
+## Examples
+
+```bash
+# List all models
+/or-models
+
+# Search for Claude models
+/or-models claude
+
+# Show only free models
+/or-models --free
+
+# Filter by Google provider with minimum 100K context
+/or-models --provider google --min-context 100000
+
+# Force refresh from API
+/or-models --refresh
+```
+
+## Related Commands
+
+- `/or-set` - Set the active model for Claude Code
+- `/or-status` - Show current OpenRouter configuration

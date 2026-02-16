@@ -1,0 +1,40 @@
+{
+  "$schema": "https://code.claude.com/schemas/marketplace.json",
+  "marketplace": {
+    "id": "justinrich/openrouter-plugin",
+    "name": "Justin Rich's Plugins",
+    "description": "OpenRouter integration and other Claude Code utilities",
+    "homepage": "https://github.com/justinrich/openrouter-plugin",
+    "plugins": [
+      {
+        "id": "openrouter-plugin",
+        "name": "openrouter-plugin",
+        "description": "Dynamically fetch and switch between 600+ OpenRouter AI models in Claude Code without needing to remember model IDs",
+        "version": "0.1.0",
+        "author": "Justin Rich",
+        "homepage": "https://github.com/justinrich/openrouter-plugin",
+        "source": "https://github.com/justinrich/openrouter-plugin",
+        "license": "MIT",
+        "keywords": ["openrouter", "models", "ai", "llm", "claude-code"],
+        "categories": ["ai", "productivity"],
+        "commands": {
+          "or-models": "List, search, and filter OpenRouter models dynamically fetched from the API",
+          "or-set": "Set the active OpenRouter model for Claude Code with hot-swap support",
+          "or-status": "Show current OpenRouter configuration and active model"
+        },
+        "skills": {
+          "openrouter-models": "OpenRouter API knowledge and model information"
+        },
+        "requirements": {
+          "api": {
+            "OPENROUTER_API_KEY": {
+              "description": "OpenRouter API key for model access",
+              "optional": false,
+              "link": "https://openrouter.ai/keys"
+            }
+          }
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,132 @@
+---
+name: or-status
+description: Show current OpenRouter configuration and active model
+argument-hint: [--verbose]
+---
+
+# OpenRouter Status Command
+
+This command displays the current OpenRouter configuration, including the active model, API key status, and cache information.
+
+## Usage
+
+- `/or-status` - Show current configuration summary
+- `/or-status --verbose` - Show detailed configuration
+
+## What This Command Does
+
+1. **Checks configuration files** for OpenRouter settings:
+   - Project: `.claude/settings.json`
+   - Global: `~/.claude/settings.json`
+2. **Displays current model** if configured
+3. **Shows API key status** (present/missing)
+4. **Displays cache info** (age, size, last refresh)
+
+## Output Format
+
+```
+OpenRouter Configuration
+========================
+
+Status: ✅ Active
+Model: anthropic/claude-sonnet-4
+Scope: project
+
+API Key: ✅ Configured (OPENROUTER_API_KEY)
+Base URL: https://openrouter.ai/api
+
+Cache Info:
+├─ Location: ~/.openrouter-plugin/models.json
+├─ Models: 626
+├─ Age: 23 minutes old
+└─ Last Refresh: 2026-02-16 09:35:00
+
+Configuration Files:
+├─ Project: .claude/settings.json (active)
+└─ Global: ~/.claude/settings.json
+```
+
+## Implementation
+
+Check configuration files and cache:
+
+```bash
+# Check project config
+if [[ -f ".claude/settings.json" ]]; then
+  # Read and display openrouter section
+fi
+
+# Check global config
+if [[ -f "${HOME}/.claude/settings.json" ]]; then
+  # Read and display openrouter section
+fi
+
+# Check cache
+if [[ -f "${HOME}/.openrouter-plugin/models.json" ]]; then
+  # Show cache stats
+fi
+```
+
+## Status Indicators
+
+- `✅ Active` - OpenRouter is configured and enabled
+- `⚠️ Partial` - Config exists but API key missing
+- `❌ Inactive` - No OpenRouter configuration found
+
+## Model Information
+
+When a model is set, display:
+- Model name and ID
+- Provider
+- Context length
+- Pricing (from cached model data)
+
+## Cache Status
+
+Show cache information:
+- File location
+- Number of models cached
+- Cache age (human-readable)
+- Last refresh timestamp
+- Cache expiry status (valid/expired)
+
+## Environment Variables
+
+Check and display:
+- `OPENROUTER_API_KEY` - present/missing
+- `ANTHROPIC_BASE_URL` - current value
+- `ANTHROPIC_AUTH_TOKEN` - matches OpenRouter key
+- `ANTHROPIC_API_KEY` - should be empty
+
+## Verbose Mode
+
+With `--verbose`, show additional details:
+- Full configuration JSON
+- All environment variables
+- Cache file contents preview
+- Network connectivity test to OpenRouter API
+
+## Examples
+
+```bash
+# Quick status check
+/or-status
+
+# Detailed configuration
+/or-status --verbose
+
+# Check if API key is set
+/or-status | grep "API Key"
+```
+
+## Related Commands
+
+- `/or-models` - List available models
+- `/or-set` - Set the active model
+
+## Integration with Claude Code
+
+The status command helps verify that OpenRouter integration is working correctly before starting a Claude Code session. Use it to:
+- Confirm model selection before starting work
+- Troubleshoot configuration issues
+- Verify API key is properly set

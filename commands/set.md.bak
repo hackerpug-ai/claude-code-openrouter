@@ -1,0 +1,118 @@
+---
+name: or-set
+description: Set the active OpenRouter model for Claude Code (with hot-swap support)
+argument-hint: [--global|--project] <model-id>
+---
+
+# OpenRouter Set Model Command
+
+This command sets the active OpenRouter model for Claude Code, with options for project-level or global configuration.
+
+## Usage
+
+- `/or-set <model-id>` - Set model for current project
+- `/or-set --global <model-id>` - Set model globally (affects all projects)
+- `/or-set --project <model-id>` - Explicitly set for current project
+
+## What This Command Does
+
+1. **Validates the model ID** against available OpenRouter models
+2. **Updates Claude Code config** with OpenRouter settings:
+   - Project: `.claude/settings.json` (current directory)
+   - Global: `~/.claude/settings.json`
+3. **Outputs shell exports** for hot-swapping the current session
+
+## Model ID Format
+
+OpenRouter model IDs use the format: `provider/model-name`
+
+Examples:
+- `anthropic/claude-sonnet-4`
+- `google/gemini-2.5-pro-preview`
+- `openai/gpt-4o`
+- `meta-llama/llama-3.1-70b-instruct`
+
+## Implementation
+
+Use the set-model script:
+
+```bash
+CLAUDE_PLUGIN_ROOT="/Users/justinrich/Projects/openrouter-plugin"
+bash "$CLAUDE_PLUGIN_ROOT/scripts/set-model.sh" [--global|--project] <model-id>
+```
+
+## Configuration Priority
+
+1. **Project config** (`.claude/settings.json`) - highest priority
+2. **Global config** (`~/.claude/settings.json`) - fallback
+3. **Default** - no OpenRouter override
+
+## Hot-Swap for Current Session
+
+The command outputs shell exports to override environment variables:
+
+```bash
+export ANTHROPIC_BASE_URL="https://openrouter.ai/api"
+export ANTHROPIC_AUTH_TOKEN="$OPENROUTER_API_KEY"
+export ANTHROPIC_API_KEY=""
+export ANTHROPIC_DEFAULT_MODEL="anthropic/claude-sonnet-4"
+```
+
+Users can eval the output or copy-paste the exports.
+
+## Configuration File Format
+
+The settings.json file is updated with:
+
+```json
+{
+  "openrouter": {
+    "enabled": true,
+    "model": "anthropic/claude-sonnet-4"
+  }
+}
+```
+
+## Model Validation
+
+Before setting, verify the model exists:
+1. Fetch available models from cache or API
+2. Check if model ID matches any available model
+3. Warn if model not found, but allow setting (for new models)
+
+## Error Handling
+
+- Missing `OPENROUTER_API_KEY` - warn user to set it
+- Invalid config directory - create if needed
+- Invalid JSON in existing config - preserve and update
+
+## Examples
+
+```bash
+# Set Claude Sonnet 4 for current project
+/or-set anthropic/claude-sonnet-4
+
+# Set Gemini globally
+/or-set --global google/gemini-2.5-pro-preview
+
+# Set a free model
+/or-set meta-llama/llama-3.1-70b-instruct:free
+
+# Interactive selection
+/or-set
+# (shows list of models to select from)
+```
+
+## Interactive Mode
+
+If no model ID is provided, show an interactive selector:
+
+1. Fetch available models
+2. Display with numbers
+3. Prompt user to select
+4. Set the selected model
+
+## Related Commands
+
+- `/or-models` - List and search available models
+- `/or-status` - Show current OpenRouter configuration
