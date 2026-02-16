@@ -1,5 +1,4 @@
 {
-  "$schema": "https://code.claude.com/schemas/marketplace.json",
   "marketplace": {
     "id": "justinrich/openrouter-plugin",
     "name": "Justin Rich's Plugins",
