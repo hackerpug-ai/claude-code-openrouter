@@ -1,22 +1,26 @@
 # OpenRouter Plugin for Claude Code
 
-Is your Claude Code stuck using the same model all the time?
+> Is your Claude Code stuck using the same model all the time?
+>
+> Is your code assistant too expensive, driving you crazy?
+>
+> Is your model list outdated, showing stuff from months ago?
+>
+> Think there's no answer?
+>
+> **You're so stupid! There is.**
 
-Is your code assistant too expensive, driving you crazy?
+# 🔮 OpenRouter Plugin
 
-Is your model list outdated, showing stuff from months ago?
+Finally, there's an elegant plugin for Claude Code that gives you **600+ models** at your fingertips.
 
-Think there's no answer?
-
-You're so stupid! There is.
-
-**OpenRouter Plugin**
-
-Finally, there's an elegant plugin for Claude Code that gives you 600+ models.
+---
 
 ## Why OpenRouter Plugin for Claude Code
 
-Claude code CAN use different models, but you need to set environment variables to use different models. Its a pain to constantly remember model IDs. OpenRouter Plugin makes it easy to switch between models without leaving your coding environment by integrating with OpenRouter's vast model library directly within your coding environment.
+Claude Code **can** use different models, but you need to set environment variables to switch between them. It's a pain to constantly remember model IDs.
+
+OpenRouter Plugin makes it easy to switch between models without leaving your coding environment by integrating with OpenRouter's vast model library.
 
 ## Features
 
@@ -28,96 +32,30 @@ Claude code CAN use different models, but you need to set environment variables 
 
 ## Quick Start
 
-### 1. Install the Plugin
+### 1. Add the Custom Marketplace & Install
 
-**Option A: Install from GitHub Marketplace (Recommended)**
+**Option A: Install from Custom Marketplace (Recommended)**
 
 ```bash
-# Install from marketplace
+# Add the custom marketplace to your Claude Code config
+claude marketplace add https://raw.githubusercontent.com/hackerpug-ai/claude-code-openrouter/main/marketplace.json
+
+# Install from the marketplace
 claude plugin install openrouter-plugin
 ```
 
-**Option B: Install from GitHub Repository**
+**Option B: Manual Installation**
 
 ```bash
-# Install directly from GitHub
-claude plugin install https://github.com/hackerpug-ai/claude-code-openrouter
-
-# Or with the git shorthand
-claude plugin install hackerpug-ai/claude-code-openrouter
-```
-
-**Option C: Manual Installation**
-
-```bash
-# Clone or symlink to Claude Code plugins
+# Clone to Claude Code plugins
 git clone https://github.com/hackerpug-ai/claude-code-openrouter.git ~/.claude/plugins/claude-code-openrouter
 
-# Or symlink if you have the source locally
-ln -s ~/Projects/openrouter-plugin ~/.claude/plugins/openrouter-plugin
+# Or symlink if you have the source locally (adjust path as needed)
+ln -s /path/to/your/claude-code-openrouter ~/.claude/plugins/claude-code-openrouter
 
 # Or add to project-specific plugins
 mkdir -p .claude/plugins
-ln -s ~/Projects/openrouter-plugin .claude/plugins/openrouter-plugin
-```
-
-### 2. Set Up OpenRouter API Key
-
-```bash
-# Add to ~/.zshrc or ~/.bashrc
-export OPENROUTER_API_KEY="sk-your-api-key-here"
-```
-
-Get your API key from https://openrouter.ai/keys
-
-### 3. Use the Plugin
-
-Start Claude Code and use the commands:
-
-````bash
-
-## Features
-
-- **Dynamic model discovery** - Fetch latest models from OpenRouter API
-- **Smart caching** - Local cache with 1-hour TTL for fast access
-- **Hot-swapping** - Change models mid-session via environment variables
-- **Flexible configuration** - Project-level or global settings
-- **Search & filter** - Find models by name, provider, pricing, capabilities
-- **Cost tracking** - See pricing and context length at a glance
-
-## Quick Start
-
-### 1. Install the Plugin
-
-**Option A: Install from GitHub Marketplace (Recommended)**
-
-```bash
-# Install from marketplace
-claude plugin install openrouter-plugin
-````
-
-**Option B: Install from GitHub Repository**
-
-```bash
-# Install directly from GitHub
-claude plugin install https://github.com/hackerpug-ai/claude-code-openrouter
-
-# Or with the git shorthand
-claude plugin install hackerpug-ai/claude-code-openrouter
-```
-
-**Option C: Manual Installation**
-
-```bash
-# Clone or symlink to Claude Code plugins
-git clone https://github.com/hackerpug-ai/claude-code-openrouter.git ~/.claude/plugins/claude-code-openrouter
-
-# Or symlink if you have the source locally
-ln -s ~/Projects/openrouter-plugin ~/.claude/plugins/openrouter-plugin
-
-# Or add to project-specific plugins
-mkdir -p .claude/plugins
-ln -s ~/Projects/openrouter-plugin .claude/plugins/openrouter-plugin
+ln -s /path/to/your/claude-code-openrouter .claude/plugins/claude-code-openrouter
 ```
 
 ### 2. Set Up OpenRouter API Key
@@ -146,6 +84,8 @@ Start Claude Code and use the commands:
 # Check current configuration
 /or-status
 ```
+
+---
 
 ## Commands
 
